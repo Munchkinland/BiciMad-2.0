@@ -1,0 +1,47 @@
+├── mi_proyecto/
+│   ├── app1.py
+│   ├── app2.py
+│   └── templates/
+│       ├── index.html
+│       ├── pagina1.html
+│       └── pagina2.html
+└── README.md
+En este esquema:
+
+mi_proyecto/: Es el directorio principal que contiene todos los archivos relacionados con tu proyecto.
+app1.py y app2.py: Son los archivos Python que contienen las aplicaciones Flask para servir las páginas HTML.
+templates/: Es el directorio que contiene los archivos HTML que serán servidos por Flask.
+index.html: Contiene el contenido de la página principal.
+pagina1.html: Contiene el contenido de la página de información.
+pagina2.html: Contiene el contenido de la página de los mosqueteros.
+README.md: Es el archivo que contiene las instrucciones y la información sobre el proyecto.
+Este esquema proporciona una representación visual de la estructura de tu proyecto, lo que facilita la comprensión de cómo están organizados los archivos y carpetas.
+
+El orden de ejecución en este proyecto sería el siguiente:
+
+Inicio del servidor Flask para la aplicación 1 (app1.py):
+
+Abre una terminal.
+Navega al directorio donde está ubicado el archivo app1.py.
+Ejecuta el siguiente comando para iniciar el servidor Flask que sirve la página de información:
+
+python app1.py
+Este comando iniciará el servidor Flask y comenzará a escuchar en el puerto 5000 (por defecto). Ahora, la aplicación estará lista para servir las páginas.
+Inicio del servidor Flask para la aplicación 2 (app2.py):
+
+Abre otra terminal (o una nueva pestaña/ventana en la misma terminal).
+Navega al directorio donde está ubicado el archivo app2.py.
+Ejecuta el siguiente comando para iniciar el servidor Flask que sirve la página de los mosqueteros:
+
+python app2.py
+Al igual que antes, este comando iniciará otro servidor Flask en el mismo puerto 5000, pero esta vez para la página de los mosqueteros.
+Acceso a la página web:
+
+Abre tu navegador web preferido.
+Visita la dirección http://127.0.0.1:5000/ para acceder a la página principal.
+Desde la página principal, puedes hacer clic en los enlaces proporcionados para visitar la página de información (/pagina1) o la página de los mosqueteros (/pagina2).
+Navegación entre páginas:
+
+Al hacer clic en los enlaces en la página principal, el navegador enviará una solicitud al servidor Flask correspondiente (app1.py o app2.py) para servir la página solicitada.
+Flask procesará la solicitud y devolverá la página HTML correspondiente al navegador, que se mostrará al usuario.
+Este es el orden general de ejecución en el proyecto. Cada aplicación Flask sirve sus propias páginas HTML y responde a las solicitudes del navegador.
