@@ -1,7 +1,22 @@
+/* Estilos para el cuerpo del documento */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+    font-family: Arial, sans-serif; /* Fuente del texto */
+    background-color: #f0f0f0; /* Color de fondo */
+    margin: 0; /* Elimina el margen predeterminado */
+    padding: 0; /* Elimina el relleno predeterminado */
 }
+
+/* Estilos para los encabezados */
 h1 {
-    color: #333;
+    color: #ff5733; /* Cambio de color del texto a un tono de naranja */
+    margin-top: 20px; /* Margen superior */
+    margin-bottom: 20px; /* Margen inferior */
 }
+
+/* Estilos para los párrafos */
+p {
+    color: #666; /* Color del texto */
+    line-height: 1.5; /* Altura de línea */
+    margin-bottom: 15px; /* Margen inferior */
+}
+
