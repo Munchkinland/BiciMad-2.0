@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Flask App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>My Flask App</h1>
+    <p>Example data: {{ data.example_key }}</p>
+    <form action="/" method="POST">
+        <button type="submit">Test de conexión</button>
+    </form>
+    {% if output %}
+    <div>
+        <h2>Salida de consola:</h2>
+        <pre>{{ output }}</pre>
+    </div>
+    {% endif %}
+</body>
+</html>
+
