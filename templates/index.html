@@ -1,24 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Flask App</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Historia de BiciMAD</title>
+    <link rel="stylesheet" href="../static/style.css">
 </head>
 <body>
-    <h1>My Flask App</h1>
-    <p>Example data: {{ data.example_key }}</p>
-    <form action="/" method="POST">
-        <button type="submit">Test de conexión</button>
-    </form>
-    {% if output %}
-    <div>
-        <h2>Salida de consola:</h2>
-        <pre>{{ output }}</pre>
+    <header>
+        <h1>Historia de BiciMAD</h1>
+    </header>
+    <div class="container">
+        <h2>Orígenes</h2>
+        <p>BiciMAD es el sistema de bicicletas públicas de Madrid, que fue inaugurado en 2014 como parte de los esfuerzos de la ciudad para promover la movilidad sostenible y reducir la congestión vehicular.</p>
+
+        <h2>Desarrollo y Expansión</h2>
+        <p>Desde su inicio, BiciMAD ha experimentado un crecimiento significativo, añadiendo estaciones y bicicletas para satisfacer la demanda de los ciudadanos madrileños. Ha pasado por varias fases de expansión y mejoras en su infraestructura.</p>
+
+        <h2>Impacto en la Movilidad Urbana</h2>
+        <p>El sistema BiciMAD ha tenido un impacto positivo en la movilidad urbana de Madrid, proporcionando a los residentes y visitantes una alternativa conveniente y ecológica al transporte motorizado. Ha contribuido a reducir la contaminación atmosférica y a aliviar la congestión del tráfico en la ciudad.</p>
+
+        <h2>Futuro</h2>
+        <p>Se espera que BiciMAD continúe creciendo y adaptándose a las necesidades cambiantes de la ciudad. Con el avance de la tecnología y un enfoque renovado en la sostenibilidad, el sistema seguirá desempeñando un papel importante en la promoción de una movilidad más limpia y eficiente en Madrid.</p>
+
+        <!-- Aquí se incluye la imagen -->
+        <img src="../static/bicimad_logo.jpg" alt="Logo de BiciMAD">
     </div>
-    {% endif %}
 </body>
 </html>
-
-

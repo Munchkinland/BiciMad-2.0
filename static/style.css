@@ -1,22 +1,28 @@
-/* Estilos para el cuerpo del documento */
 body {
-    font-family: Arial, sans-serif; /* Fuente del texto */
-    background-color: #f0f0f0; /* Color de fondo */
-    margin: 0; /* Elimina el margen predeterminado */
-    padding: 0; /* Elimina el relleno predeterminado */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #000;
+    color: #fff;
 }
 
-/* Estilos para los encabezados */
-h1 {
-    color: #ff5733; /* Cambio de color del texto a un tono de naranja */
-    margin-top: 20px; /* Margen superior */
-    margin-bottom: 20px; /* Margen inferior */
+header {
+    background-color: #007bff;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
 }
 
-/* Estilos para los párrafos */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1, h2 {
+    color: #fff;
+}
+
 p {
-    color: #666; /* Color del texto */
-    line-height: 1.5; /* Altura de línea */
-    margin-bottom: 15px; /* Margen inferior */
+    line-height: 1.6;
 }
-
