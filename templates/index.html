@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Historia de BiciMAD</title>
     <link rel="stylesheet" href="../static/style.css">
+    <style>
+        .fade-in {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .fade-in.active {
+            opacity: 1;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -12,19 +21,53 @@
     </header>
     <div class="container">
         <h2>Orígenes</h2>
-        <p>BiciMAD es el sistema de bicicletas públicas de Madrid, que fue inaugurado en 2014 como parte de los esfuerzos de la ciudad para promover la movilidad sostenible y reducir la congestión vehicular.</p>
+        <p>BiciMAD, el sistema de bicicletas públicas de Madrid, inaugurado en 2014, promueve la movilidad sostenible y reduce la congestión vehicular.</p>
 
         <h2>Desarrollo y Expansión</h2>
-        <p>Desde su inicio, BiciMAD ha experimentado un crecimiento significativo, añadiendo estaciones y bicicletas para satisfacer la demanda de los ciudadanos madrileños. Ha pasado por varias fases de expansión y mejoras en su infraestructura.</p>
+        <p>BiciMAD ha crecido significativamente desde su inicio, contando actualmente con 7,500 bicicletas eléctricas y 611 estaciones en toda la ciudad, facilitando casi 6 millones de viajes.</p>
 
         <h2>Impacto en la Movilidad Urbana</h2>
-        <p>El sistema BiciMAD ha tenido un impacto positivo en la movilidad urbana de Madrid, proporcionando a los residentes y visitantes una alternativa conveniente y ecológica al transporte motorizado. Ha contribuido a reducir la contaminación atmosférica y a aliviar la congestión del tráfico en la ciudad.</p>
+        <p>BiciMAD ha reducido la contaminación y la congestión del tráfico en Madrid, proporcionando una alternativa ecológica y conveniente al transporte motorizado.</p>
 
-        <h2>Futuro</h2>
-        <p>Se espera que BiciMAD continúe creciendo y adaptándose a las necesidades cambiantes de la ciudad. Con el avance de la tecnología y un enfoque renovado en la sostenibilidad, el sistema seguirá desempeñando un papel importante en la promoción de una movilidad más limpia y eficiente en Madrid.</p>
+        <img src="../static/bicis.jpg" alt="Placeholder" class="fade-in" id="imagen1">
 
-        <!-- Aquí se incluye la imagen -->
-        <img src="../static/bicimad_logo.jpg" alt="Logo de BiciMAD">
+        <h2>Objetivo de nuestro proyecto</h2>
+        <p>Nuestro objetivo es optimizar BiciMAD utilizando Machine Learning para reducir la huella ecológica, promover un estilo de vida saludable y mejorar la experiencia del usuario.</p>
+
+        <img src="../static/bicimad_logo.jpg" alt="Placeholder" class="fade-in" id="imagen2">
+
+        <!-- Imágenes reales -->
+        <img src="../static/bicis.jpg" alt="Bicis" class="real-img" id="imagenReal1" style="display: none;">
+        <img src="../static/bicimad_logo.jpg" alt="Logo de BiciMAD" class="real-img" id="imagenReal2" style="display: none;">
     </div>
+
+    <script>
+        // Mostrar imágenes gradualmente al hacer scroll
+        window.addEventListener('scroll', () => {
+            const imagenes = document.querySelectorAll('.fade-in');
+            const imgsReales = document.querySelectorAll('.real-img');
+
+            imagenes.forEach((imagen, index) => {
+                if (index === 0 && isInViewport(imagen)) {
+                    imagen.classList.add('active');
+                    imgsReales[index].style.display = 'initial';
+                } else if (isInViewport(imagen)) {
+                    imagen.classList.add('active');
+                    imgsReales[index - 1].classList.add('active');
+                }
+            });
+        });
+
+        // Función para verificar si un elemento está en el viewport
+        function isInViewport(element) {
+            const rect = element.getBoundingClientRect();
+            return (
+                rect.top >= 0 &&
+                rect.left >= 0 &&
+                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+            );
+        }
+    </script>
 </body>
 </html>
