@@ -13,6 +13,30 @@
         .fade-in.active {
             opacity: 1;
         }
+        .container {
+            position: relative;
+        }
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #f2f2f2;
+            color: #444;
+            padding: 10px 20px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .prev:hover, .next:hover {
+            background-color: #ddd;
+        }
+        .prev {
+            left: 10px;
+        }
+        .next {
+            right: 10px;
+        }
     </style>
 </head>
 <body>
@@ -20,6 +44,7 @@
         <h1>Historia de BiciMAD</h1>
     </header>
     <div class="container">
+
         <h2>Orígenes</h2>
         <p>BiciMAD, el sistema de bicicletas públicas de Madrid, inaugurado en 2014, promueve la movilidad sostenible y reduce la congestión vehicular.</p>
 
@@ -29,16 +54,19 @@
         <h2>Impacto en la Movilidad Urbana</h2>
         <p>BiciMAD ha reducido la contaminación y la congestión del tráfico en Madrid, proporcionando una alternativa ecológica y conveniente al transporte motorizado.</p>
 
-        <img src="../static/bicis.jpg" alt="Placeholder" class="fade-in" id="imagen1">
+        <!-- Imagen 1 reducida a 400 píxeles de ancho -->
+        <img src="../static/bicis.jpg" alt="Placeholder" class="fade-in" id="imagen1" width="400">
 
         <h2>Objetivo de nuestro proyecto</h2>
         <p>Nuestro objetivo es optimizar BiciMAD utilizando Machine Learning para reducir la huella ecológica, promover un estilo de vida saludable y mejorar la experiencia del usuario.</p>
-
-        <img src="../static/bicimad_logo.jpg" alt="Placeholder" class="fade-in" id="imagen2">
+        <button class="prev" onclick="plusSlides(-1)">❮ Anterior</button>
+        <button class="next" onclick="plusSlides(1)">Siguiente ❯</button>
+        <!-- Imagen 2 reducida a 400 píxeles de ancho -->
+        <img src="../static/bicimad_logo.jpg" alt="Placeholder" class="fade-in" id="imagen2" width="400">
 
         <!-- Imágenes reales -->
-        <img src="../static/bicis.jpg" alt="Bicis" class="real-img" id="imagenReal1" style="display: none;">
-        <img src="../static/bicimad_logo.jpg" alt="Logo de BiciMAD" class="real-img" id="imagenReal2" style="display: none;">
+        <!-- <img src="../static/bicis.jpg" alt="Bicis" class="real-img" id="imagenReal1" style="display: none;"> -->
+        <!-- <img src="../static/bicimad_logo.jpg" alt="Logo de BiciMAD" class="real-img" id="imagenReal2" style="display: none;"> -->
     </div>
 
     <script>
@@ -67,6 +95,25 @@
                 rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
                 rect.right <= (window.innerWidth || document.documentElement.clientWidth)
             );
+        }
+
+        // Función para cambiar las diapositivas
+        let slideIndex = 1;
+        showSlides(slideIndex);
+
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
+        function showSlides(n) {
+            let i;
+            const slides = document.querySelectorAll('.fade-in');
+            if (n > slides.length) {slideIndex = 1}    
+            if (n < 1) {slideIndex = slides.length}
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = 'none';  
+            }
+            slides[slideIndex-1].style.display = 'block';  
         }
     </script>
 </body>
