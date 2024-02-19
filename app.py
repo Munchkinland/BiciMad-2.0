@@ -1,7 +1,5 @@
 from flask import Flask, render_template, request
 import requests
-import sys
-from io import StringIO
 
 app = Flask(__name__)
 
@@ -75,19 +73,9 @@ def index():
 
     return render_template('index.html', data=data, output=output)
 
-    @app.route('/eda')
+@app.route('/eda')
 def eda():
     return render_template('eda.html')
 
-
 if __name__ == '__main__':
     app.run(debug=True)
-
-
-
-
-
-
-
-
-
