@@ -59,43 +59,31 @@
 
         <h2>Objetivo de nuestro proyecto</h2>
         <p>Nuestro objetivo es optimizar BiciMAD utilizando Machine Learning para reducir la huella ecológica, promover un estilo de vida saludable y mejorar la experiencia del usuario.</p>
-        <button class="prev" onclick="plusSlides(-1)">❮ Anterior</button>
-        <button class="next" onclick="plusSlides(1)">Siguiente ❯</button>
         <!-- Imagen 2 reducida a 400 píxeles de ancho -->
         <img src="../static/bicimad_logo.jpg" alt="Placeholder" class="fade-in" id="imagen2" width="400">
 
         <!-- Imágenes reales -->
         <!-- <img src="../static/bicis.jpg" alt="Bicis" class="real-img" id="imagenReal1" style="display: none;"> -->
         <!-- <img src="../static/bicimad_logo.jpg" alt="Logo de BiciMAD" class="real-img" id="imagenReal2" style="display: none;"> -->
+
+        <!-- Botón para ir a la página 2 -->
+        <a href="eda.html"><button>Página 2</button></a>
     </div>
 
     <script>
-        // Mostrar imágenes gradualmente al hacer scroll
-        window.addEventListener('scroll', () => {
-            const imagenes = document.querySelectorAll('.fade-in');
-            const imgsReales = document.querySelectorAll('.real-img');
-
-            imagenes.forEach((imagen, index) => {
-                if (index === 0 && isInViewport(imagen)) {
-                    imagen.classList.add('active');
-                    imgsReales[index].style.display = 'initial';
-                } else if (isInViewport(imagen)) {
-                    imagen.classList.add('active');
-                    imgsReales[index - 1].classList.add('active');
+        // Mostrar imágenes gradualmente al hacer scroll usando IntersectionObserver
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
                 }
             });
         });
 
-        // Función para verificar si un elemento está en el viewport
-        function isInViewport(element) {
-            const rect = element.getBoundingClientRect();
-            return (
-                rect.top >= 0 &&
-                rect.left >= 0 &&
-                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-            );
-        }
+        const imagenes = document.querySelectorAll('.fade-in');
+        imagenes.forEach(imagen => {
+            observer.observe(imagen);
+        });
 
         // Función para cambiar las diapositivas
         let slideIndex = 1;
@@ -106,15 +94,15 @@
         }
 
         function showSlides(n) {
-            let i;
             const slides = document.querySelectorAll('.fade-in');
             if (n > slides.length) {slideIndex = 1}    
             if (n < 1) {slideIndex = slides.length}
-            for (i = 0; i < slides.length; i++) {
-                slides[i].style.display = 'none';  
-            }
+            slides.forEach(slide => {
+                slide.style.display = 'none';  
+            });
             slides[slideIndex-1].style.display = 'block';  
         }
     </script>
 </body>
 </html>
+

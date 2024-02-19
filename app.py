@@ -75,6 +75,11 @@ def index():
 
     return render_template('index.html', data=data, output=output)
 
+    @app.route('/eda')
+def eda():
+    return render_template('eda.html')
+
+
 if __name__ == '__main__':
     app.run(debug=True)
 
