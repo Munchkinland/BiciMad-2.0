@@ -77,5 +77,10 @@ def index():
 def eda():
     return render_template('eda.html')
 
+@app.route('/proyectoml')
+def proyectoml():
+    return render_template('proyectoml.html')
+
+
 if __name__ == '__main__':
     app.run(debug=True)
