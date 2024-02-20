@@ -81,6 +81,9 @@ def eda():
 def proyectoml():
     return render_template('proyectoml.html')
 
+@app.route('/appuser')
+def appuser():
+    return render_template('appuser.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
