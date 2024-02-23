@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard BiciMAD</title>
+    <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        #map { height: 400px; }
+    </style>
+</head>
+<body>
+    <h2>Estaciones BiciMAD</h2>
+    <div id="map"></div>
+    <script>
+        $(document).ready(function(){
+            var mymap = L.map('map').setView([40.416775, -3.703790], 13);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(mymap);
+
+            function cargarEstaciones() {
+                $.ajax({
+                    url: '/api/estaciones',
+                    type: 'GET',
+                    success: function(estaciones) {
+                        estaciones.forEach(function(estacion) {
+                            var lat = estacion.geometry.coordinates[1];
+                            var lon = estacion.geometry.coordinates[0];
+                            var marker = L.marker([lat, lon]).addTo(mymap);
+                            marker.bindPopup("<b>" + estacion.name + "</b><br>Bicicletas disponibles: " + estacion.dock_bikes);
+                        });
+                    },
+                    error: function() {
+                        alert("Error al cargar las estaciones.");
+                    }
+                });
+            }
+
+            cargarEstaciones();
+        });
+    </script>
+</body>
+</html>
