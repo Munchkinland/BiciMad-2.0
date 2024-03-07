@@ -1,28 +1,73 @@
+/* Importar las fuentes desde Google Fonts o similar */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&display=swap');
+
+/* Estilos Base */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Inter', sans-serif; /* Cambiado a Inter para el texto principal */
     margin: 0;
     padding: 0;
-    background-color: #000;
-    color: #fff;
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    color: #ffffff;
+    font-size: 16px;
+    overflow-x: hidden;
 }
 
+/* Encabezado */
 header {
-    background-color: #007bff;
-    color: #fff;
+    background-color: #6D5DFC;
+    color: #ffffff;
     text-align: center;
     padding: 20px 0;
+    background: linear-gradient(135deg, #6D5DFC, #9B6FFF);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 
+/* Contenedor */
 .container {
-    max-width: 800px;
-    margin: 0 auto;
+    max-width: 960px;
+    margin: 40px auto;
     padding: 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 }
 
+/* Títulos */
 h1, h2 {
-    color: #fff;
+    font-family: 'Space Grotesk', sans-serif; /* Cambiado a Space Grotesk para títulos */
+    color: #ffffff;
+    margin: 20px 0;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
-p {
-    line-height: 1.6;
+/* Párrafos y demás texto */
+p, a, button {
+    font-family: 'Inter', sans-serif; /* Asegura que Inter se use para elementos de texto adicionales */
+}
+
+/* Efectos de enlace */
+a {
+    color: #9B6FFF;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #6D5DFC;
+    text-decoration: none;
+}
+
+/* Estilo adicional para botones */
+button {
+    background: linear-gradient(135deg, #9B6FFF, #6D5DFC);
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background: linear-gradient(135deg, #6D5DFC, #9B6FFF);
 }

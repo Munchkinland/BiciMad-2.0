@@ -3,33 +3,153 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interfaz de Usuario</title>
+    <title>Proyecto de Machine Learning</title>
     <link rel="stylesheet" href="../static/style.css">
     <style>
-        /* Agrega estilos específicos para la interfaz de usuario aquí */
+        /* Importa la fuente Google que prefieras */
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+        /* Establece un color de fondo general y la fuente */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #120136; /* Color de fondo oscuro para todo el body */
+            font-family: 'Roboto', sans-serif; /* Tipografía Roboto para todo el texto */
+            color: #ffffff; /* Color del texto */
+        }
+
+        /* Configura el área de contenido principal */
+        main {
+            display: grid;
+            width: calc(100% - 40px); /* Asegura que el contenido se ajuste al padding */
+            height: calc(100vh - 40px); /* Asegura que el contenido se ajuste a la altura de la ventana */
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: auto 1fr 1fr auto;
+            gap: 20px;
+            padding: 20px;
+            box-sizing: border-box;
+            grid-template-areas:
+                "header header"
+                "test estacion"
+                "ruta calculadora"
+                "footer footer";
+        }
+
+        header, .test, .estacion, .ruta, .calculadora, footer {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 20px;
+            background-color: #3b0273; /* Color de fondo para encabezados y pie de página */
+            border-radius: 10px;
+            transition: transform 0.3s; /* Animación de transformación para el hover */
+        }
+
+        header {
+            grid-area: header;
+            font-size: 2rem; /* Tamaño del texto para el título principal */
+        }
+
+        .test, .estacion, .ruta, .calculadora {
+            background-color: #5a189a; /* Color de fondo para las secciones */
+            color: #ffffff; /* Color del texto */
+            grid-area: auto; /* Asignación automática al área de cuadrícula */
+            border-radius: 10px;
+        }
+
+        footer {
+            grid-area: footer;
+            background-color: #3b0273; /* Color de fondo para el pie de página */
+            width: 100%; /* Ancho completo dentro de su área de cuadrícula */
+            border-radius: 10px;
+        }
+
+        /* Estilos de botones y efectos de hover */
+        button {
+            background-color: #9d4edd; /* Color de fondo para botones */
+            color: #ffffff; /* Color del texto */
+            border: none;
+            padding: 10px 20px;
+            margin-top: 10px; /* Espacio superior para separar del texto */
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease; /* Transición suave para color y sombra */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Sombra para dar efecto elevado */
+        }
+
+        button:hover {
+            background-color: #c77dff; /* Color de fondo al hacer hover */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6); /* Sombra más grande al hacer hover */
+            transform: translateY(-3px); /* Elevación al hacer hover */
+        }
+
+        .navigation-buttons a {
+            text-decoration: none; /* Quita el subrayado de los enlaces */
+            color: #ffffff; /* Color del texto */
+        }
+
+        .navigation-buttons a button {
+            background: none; /* Fondo transparente para los botones de enlace */
+            border: 2px solid #ffffff; /* Borde blanco para resaltar */
+            margin: 0 10px; /* Espaciado a los lados de los botones */
+        }
+        
     </style>
 </head>
 <body>
-    <header>
-        <h1>Interfaz de Usuario</h1>
-    </header>
-    <div class="container">
-        <h2>Bienvenido a la Interfaz de Usuario</h2>
-        <p>Esta página muestra una interfaz de usuario simple con un botón para volver a la página anterior.</p>
-        
-        <!-- Contenido de la interfaz de usuario -->
-        <button onclick="goBack()">Volver a Proyecto de Machine Learning</button>
-
-        <script>
-            function goBack() {
-                window.history.back();
-            }
-        </script>
-
-        <!-- Botones para navegar entre páginas -->
-        <div class="navigation-buttons">
-            <a href="/proyectoml"><button>Ir a la página anterior</button></a>
+    <main>
+        <header>
+            <h1>📺Interfaz de Usuario BiciMAD 🚵‍♀️</h1>
+        </header>
+        <div class="test">
+            <h2>Test de Conexión</h2>
+            <p>Verifica tu conexión a internet.</p>
+            <button onclick="testConexion()">Testear Conexión</button>
         </div>
-    </div>
+        <div class="estacion">
+            <h2>Estación más cercana a mi ubicación</h2>
+            <p>Encuentra la estación de BiciMAD más cercana a ti.</p>
+            <button onclick="buscarEstacion()">Buscar Estación</button>
+        </div>
+        <div class="ruta">
+            <h2>Ruta óptima</h2>
+            <p>Calcula la ruta óptima para llegar a tu destino.</p>
+            <button onclick="calcularRuta()">Calcular Ruta</button>
+        </div>
+        <div class="calculadora">
+            <h2>Calcula tu huella ecólogica</h2>
+            <p>Reduce tu huella de carbono usando BiciMAD.</p>
+            <button onclick="calcularHuella()">Calcular Huella</button>
+        </div>
+        <footer>
+            <div class="navigation-buttons">
+                <button onclick="window.history.back();">Volver</button>
+                <a href="/proyectoml"><button>Proyecto ML</button></a>
+            </div>
+        </footer>
+    </main>
+
+    <script>
+        function testConexion() {
+            alert("Testeando la conexión...");
+        }
+
+        function buscarEstacion() {
+            alert("Buscando la estación más cercana...");
+        }
+
+        function calcularRuta() {
+            alert("Calculando la ruta óptima...");
+        }
+
+        function calcularHuella() {
+            alert("Calculando la reducción de tu huella de carbono...");
+        }
+    </script>
 </body>
 </html>
