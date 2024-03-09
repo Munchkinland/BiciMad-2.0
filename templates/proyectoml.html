@@ -3,48 +3,161 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proyecto de Machine Learning</title>
+    <title>Interfaz de Usuario BiciMAD</title>
     <link rel="stylesheet" href="../static/style.css">
     <style>
-        /* Agrega estilos específicos para la página del proyecto de Machine Learning aquí */
+        /* Importa la fuente Google que prefieras */
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+        /* Establece un color de fondo general y la fuente */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #120136; /* Color de fondo oscuro para todo el body */
+            font-family: 'Roboto', sans-serif; /* Tipografía Roboto para todo el texto */
+            color: #ffffff; /* Color del texto */
+        }
+
+        /* Configura el área de contenido principal */
+        main {
+            display: grid;
+            width: calc(100% - 40px); /* Asegura que el contenido se ajuste al padding */
+            height: calc(100vh - 40px); /* Asegura que el contenido se ajuste a la altura de la ventana */
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: auto 1fr 1fr auto;
+            gap: 20px;
+            padding: 20px;
+            box-sizing: border-box;
+            grid-template-areas:
+                "header header"
+                "test estacion"
+                "ruta calculadora"
+                "footer footer";
+        }
+
+        header, .test, .estacion, .ruta, .calculadora, footer {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 20px;
+            background-color: #3b0273; /* Color de fondo para encabezados y pie de página */
+            border-radius: 10px;
+            transition: transform 0.3s; /* Animación de transformación para el hover */
+        }
+
+        header {
+            grid-area: header;
+            font-size: 2rem; /* Tamaño del texto para el título principal */
+        }
+
+        .test, .estacion, .ruta, .calculadora {
+            background-color: #5a189a; /* Color de fondo para las secciones */
+            color: #ffffff; /* Color del texto */
+            grid-area: auto; /* Asignación automática al área de cuadrícula */
+            border-radius: 10px;
+        }
+
+        footer {
+            grid-area: footer;
+            background-color: #3b0273; /* Color de fondo para el pie de página */
+            width: 100%; /* Ancho completo dentro de su área de cuadrícula */
+            border-radius: 10px;
+        }
+
+        /* Estilos de botones y efectos de hover */
+        button {
+            background-color: #9d4edd; /* Color de fondo para botones */
+            color: #ffffff; /* Color del texto */
+            border: none;
+            padding: 10px 20px;
+            margin-top: 10px; /* Espacio superior para separar del texto */
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease; /* Transición suave para color y sombra */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Sombra para dar efecto elevado */
+        }
+
+        button:hover {
+            background-color: #c77dff; /* Color de fondo al hacer hover */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6); /* Sombra más grande al hacer hover */
+            transform: translateY(-3px); /* Elevación al hacer hover */
+        }
+
+        .navigation-buttons a {
+            text-decoration: none; /* Quita el subrayado de los enlaces */
+            color: #ffffff; /* Color del texto */
+        }
+
+        .navigation-buttons a button {
+            background: none; /* Fondo transparente para los botones de enlace */
+            border: 2px solid #ffffff; /* Borde blanco para resaltar */
+            margin: 0 10px; /* Espaciado a los lados de los botones */
+        }
+        
+        /* Estilos adicionales para los botones de predicción */
+        .prediction-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .prediction-buttons button {
+            margin: 5px;
+        }
     </style>
 </head>
 <body>
-    <header>
-        <h1>👨‍💻Proyecto de Machine Learning🚀</h1>
-    </header>
-    <div class="container">
-        <h2>Introducción al Proyecto</h2>
-        <p>En esta página, exploraremos los fundamentos y la implementación de un proyecto de Machine Learning, incluyendo la recopilación de datos, el procesamiento de datos, el entrenamiento de modelos y la evaluación de modelos.</p>
-        
-        <h2>Recopilación y Procesamiento de Datos</h2>
-        <p>El primer paso en cualquier proyecto de aprendizaje automático es recopilar y procesar los datos necesarios para el entrenamiento del modelo. Esto puede incluir la limpieza de datos, la normalización, y la división en conjuntos de entrenamiento y prueba.</p>
-        
-        <!-- Agrega tus detalles sobre la recopilación y procesamiento de datos aquí -->
-        
-        <h2>Modelos y Técnicas de Aprendizaje</h2>
-        <p>A continuación, se discuten diferentes modelos y técnicas de aprendizaje automático utilizados en este proyecto, incluyendo modelos supervisados, no supervisados, y de aprendizaje por refuerzo.</p>
-        
-        <!-- Agrega detalles sobre modelos y técnicas de aprendizaje aquí -->
-        
-        <h2>Resultados y Evaluación</h2>
-        <p>Tras el entrenamiento de los modelos, se evalúan sus rendimientos utilizando métricas específicas. Los resultados obtenidos permiten entender la efectividad de los modelos y técnicas aplicadas.</p>
-        
-        <!-- Agrega tus resultados y evaluaciones aquí -->
-        
-        <h2>Conclusiones</h2>
-        <p>Basándonos en el desarrollo y análisis del proyecto de Machine Learning, podemos llegar a las siguientes conclusiones:</p>
-        <ul>
-            <li>Conclusión 1</li>
-            <li>Conclusión 2</li>
-            <li>Conclusión 3</li>
-        </ul>
+    <main>
+        <header>
+            <h1>🧑‍💻Interfaz de Predicción🤖</h1><img src="../static/babyYoda.gif" alt="Placeholder" class="fade-in" id="imagen1" width="260">
+        </header>
+        <div class="test">
+            <h2>Predicción de la Demanda de Bicicletas</h2>
+            <p>Selecciona el marco temporal para la predicción:</p>
+            <div class="prediction-buttons">
+                <button onclick="prediccionBicicletas('1 semana')">1 semana</button>
+                <button onclick="prediccionBicicletas('1 mes')">1 mes</button>
+                <button onclick="prediccionBicicletas('3 meses')">3 meses</button>
+                <button onclick="prediccionBicicletas('6 meses')">6 meses</button>
+                <button onclick="prediccionBicicletas('1 año')">1 año</button>
+            </div>
+        </div>
+        <div class="estacion">
+            <h2>Predicción de Ruta</h2>
+            <p>Introduce la estación de unlock y de lock para la predicción:</p>
+            <input type="text" id="unlock_station" placeholder="Unlock Station">
+            <select id="lock_station">
+                <option value="estacion1">Estación 1</option>
+                <option value="estacion2">Estación 2</option>
+                <option value="estacion3">Estación 3</option>
+                <!-- Agrega más opciones según sea necesario -->
+            </select>
+            <button onclick="prediccionRuta()">Calcular Ruta</button>
+        </div>
+        <footer>
+            <div class="navigation-buttons">
+                <button onclick="window.history.back();">Volver a la página anterior</button>
+                <button onclick="window.location.href='/appuser';">Ir a la página siguiente</button>
+            </div>
+        </footer>
+    </main>
 
-        <!-- Botón para regresar a la página anterior -->
-        <a href="/"><button>Volver a la página anterior</button></a>
+    <script>
+        function prediccionBicicletas(tiempo) {
+            alert("Predicción de la demanda de bicicletas para " + tiempo);
+        }
 
-        <!-- Botón para ir a la página siguiente -->
-        <a href="/appuser"><button>Ir a la página siguiente</button></a>
-    </div>
+        function prediccionRuta() {
+            var unlockStation = document.getElementById("unlock_station").value;
+            var lockStation = document.getElementById("lock_station").value;
+            alert("Predicción de ruta para la estación de " + unlockStation + " a la estación de " + lockStation);
+        }
+    </script>
 </body>
 </html>
+
