@@ -6,10 +6,7 @@
     <title>Proyecto de Machine Learning</title>
     <link rel="stylesheet" href="../static/style.css">
     <style>
-        /* Importa la fuente Google que prefieras */
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
-
-        /* Establece un color de fondo general y la fuente */
         body, html {
             margin: 0;
             padding: 0;
@@ -17,16 +14,14 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #120136; /* Color de fondo oscuro para todo el body */
-            font-family: 'Roboto', sans-serif; /* Tipografía Roboto para todo el texto */
-            color: #ffffff; /* Color del texto */
+            background-color: #120136;
+            font-family: 'Roboto', sans-serif;
+            color: #ffffff;
         }
-
-        /* Configura el área de contenido principal */
         main {
             display: grid;
-            width: calc(100% - 40px); /* Asegura que el contenido se ajuste al padding */
-            height: calc(100vh - 40px); /* Asegura que el contenido se ajuste a la altura de la ventana */
+            width: calc(100% - 40px);
+            height: calc(100vh - 40px);
             grid-template-columns: repeat(2, 1fr);
             grid-template-rows: auto 1fr 1fr auto;
             gap: 20px;
@@ -38,67 +33,57 @@
                 "ruta calculadora"
                 "footer footer";
         }
-
         header, .test, .estacion, .ruta, .calculadora, footer {
             display: flex;
             align-items: center;
             justify-content: center;
             flex-direction: column;
             padding: 20px;
-            background-color: #3b0273; /* Color de fondo para encabezados y pie de página */
+            background-color: #3b0273;
             border-radius: 10px;
-            transition: transform 0.3s; /* Animación de transformación para el hover */
+            transition: transform 0.3s;
         }
-
         header {
             grid-area: header;
-            font-size: 2rem; /* Tamaño del texto para el título principal */
+            font-size: 2rem;
         }
-
         .test, .estacion, .ruta, .calculadora {
-            background-color: #5a189a; /* Color de fondo para las secciones */
-            color: #ffffff; /* Color del texto */
-            grid-area: auto; /* Asignación automática al área de cuadrícula */
+            background-color: #5a189a;
+            color: #ffffff;
+            grid-area: auto;
             border-radius: 10px;
         }
-
         footer {
             grid-area: footer;
-            background-color: #3b0273; /* Color de fondo para el pie de página */
-            width: 100%; /* Ancho completo dentro de su área de cuadrícula */
+            background-color: #3b0273;
+            width: 100%;
             border-radius: 10px;
         }
-
-        /* Estilos de botones y efectos de hover */
         button {
-            background-color: #9d4edd; /* Color de fondo para botones */
-            color: #ffffff; /* Color del texto */
+            background-color: #9d4edd;
+            color: #ffffff;
             border: none;
             padding: 10px 20px;
-            margin-top: 10px; /* Espacio superior para separar del texto */
+            margin-top: 10px;
             border-radius: 5px;
             cursor: pointer;
-            transition: all 0.3s ease; /* Transición suave para color y sombra */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Sombra para dar efecto elevado */
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
         }
-
         button:hover {
-            background-color: #c77dff; /* Color de fondo al hacer hover */
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6); /* Sombra más grande al hacer hover */
-            transform: translateY(-3px); /* Elevación al hacer hover */
+            background-color: #c77dff;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
+            transform: translateY(-3px);
         }
-
         .navigation-buttons a {
-            text-decoration: none; /* Quita el subrayado de los enlaces */
-            color: #ffffff; /* Color del texto */
+            text-decoration: none;
+            color: #ffffff;
         }
-
         .navigation-buttons a button {
-            background: none; /* Fondo transparente para los botones de enlace */
-            border: 2px solid #ffffff; /* Borde blanco para resaltar */
-            margin: 0 10px; /* Espaciado a los lados de los botones */
+            background: none;
+            border: 2px solid #ffffff;
+            margin: 0 10px;
         }
-        
     </style>
 </head>
 <body>
@@ -136,17 +121,17 @@
 
     <script>
         function testConexion() {
-            alert("Testeando la conexión...");
+            fetch('/test_conexion')
+                .then(response => response.json())
+                .then(data => alert(data.mensaje))
+                .catch(error => console.error('Error:', error));
         }
-
         function buscarEstacion() {
             alert("Buscando la estación más cercana...");
         }
-
         function calcularRuta() {
             alert("Calculando la ruta óptima...");
         }
-
         function calcularHuella() {
             alert("Calculando la reducción de tu huella de carbono...");
         }
