@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interfaz de Usuario BiciMAD</title>
     <link rel="stylesheet" href="../static/style.css">
@@ -120,25 +121,54 @@
             <h2>Predicción de la Demanda de Bicicletas</h2>
             <p>Selecciona el marco temporal para la predicción:</p>
             <div class="prediction-buttons">
-                <button onclick="prediccionBicicletas('1 semana')">1 semana</button>
-                <button onclick="prediccionBicicletas('1 mes')">1 mes</button>
-                <button onclick="prediccionBicicletas('3 meses')">3 meses</button>
-                <button onclick="prediccionBicicletas('6 meses')">6 meses</button>
-                <button onclick="prediccionBicicletas('1 año')">1 año</button>
+                <button onclick="solicitarPrediccion(1)">1 día</button>
+                <button onclick="solicitarPrediccion(7)">7 días</button>
+                <button onclick="solicitarPrediccion(15)">15 días</button>
+                <button onclick="solicitarPrediccion(30)">30 días</button>
             </div>
-        </div>
-        <div class="estacion">
-            <h2>Predicción de Ruta</h2>
-            <p>Introduce la estación de unlock y de lock para la predicción:</p>
-            <input type="text" id="unlock_station" placeholder="Unlock Station">
-            <select id="lock_station">
-                <option value="estacion1">Estación 1</option>
-                <option value="estacion2">Estación 2</option>
-                <option value="estacion3">Estación 3</option>
-                <!-- Agrega más opciones según sea necesario -->
-            </select>
-            <button onclick="prediccionRuta()">Calcular Ruta</button>
-        </div>
+            <div id="graficoPrediccion" style="width:100%; height:100%;"></div>
+
+            
+            <script>
+                function solicitarPrediccion(dias) {
+                    fetch('/prediccion', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({dias: dias}),
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        const trace1 = {
+                            type: 'scatter',
+                            mode: 'lines',
+                            x: data.fechas,
+                            y: data.valores,
+                            marker: {color: '#17BECF'},
+                            name: 'Predicción de Demanda'
+                        };
+            
+                        const layout = {
+                            title: 'Predicción de Demanda de Bicicletas',
+                            xaxis: {
+                                title: 'Fecha'
+                            },
+                            yaxis: {
+                                title: 'Demanda'
+                            }
+                        };
+            
+                        Plotly.newPlot('graficoPrediccion', [trace1], layout);
+                    })
+                    .catch((error) => {
+                        console.error('Error:', error);
+                    });
+                }
+            </script>
+            
+            </script>
+       
         <footer>
             <div class="navigation-buttons">
                 <button onclick="window.history.back();">Volver a la página anterior</button>
