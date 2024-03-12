@@ -47,20 +47,18 @@ def test_conexion():
 @app.route('/bicimadgo', methods=['GET'])
 def obtener_bicimad_go():
     """Obtiene la lista de zonas de BiciMAD Go disponibles."""
-    token, _ = iniciar_sesion('TU_EMAIL', 'TU_CONTRASEÑA')  # Asegúrate de usar tus credenciales reales
-    if token:
-        url = f"https://openapi.emtmadrid.es/v1/transport/bicimad/gozones/"
-        headers = {
-            "Authorization": f"Bearer {token}",
-        }
-        response = requests.get(url, headers=headers)
-        if response.status_code == 200:
-            zonas = response.json().get("data", [])
-            return jsonify(zonas)
-        else:
-            return jsonify({"mensaje": "Error al obtener las zonas BiciMAD Go."}), response.status_code
+    # Utilizando el token de acceso estático proporcionado
+    token = "136f0baf-ea3d-41d8-89e4-8a212b8a2e65"
+    url = f"{base_url}/transport/bicimadgo/zones/"
+    headers = {"accessToken": token}
+    response = requests.get(url, headers=headers)
+    if response.status_code == 200:
+        zonas = response.json().get("data", [])
+        return jsonify(zonas)
     else:
-        return jsonify({"mensaje": "Error de autenticación."}), 401
+        return jsonify({"mensaje": "Error al obtener las zonas BiciMAD Go."}), response.status_code
+
+
 
 
 
