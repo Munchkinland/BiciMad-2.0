@@ -1,15 +1,12 @@
 from flask import Flask, render_template, request, jsonify
 import requests
-from flask_cors import CORS  # Importa CORS si necesitas hacer solicitudes cruzadas desde el frontend
 
 app = Flask(__name__)
-CORS(app)  # Habilita CORS para toda tu aplicación Flask
+
 
 # URL base de la API de BiciMAD
 base_url = "https://openapi.emtmadrid.es/v1"
 
-# Tu token de OpenRouteService (Considera usar variables de entorno para esto)
-ORS_TOKEN = "5b3ce3597851110001cf6248c4c745e062b146b3a5ff64f693fed774"
 
 def iniciar_sesion(email, password):
     """Inicia sesión en la API de BiciMAD y devuelve el token de acceso."""
@@ -49,22 +46,22 @@ def test_conexion():
 
 @app.route('/bicimadgo', methods=['GET'])
 def obtener_bicimad_go():
-    """Obtiene la lista de bicicletas BiciMAD Go disponibles en tiempo real."""
-    token, _ = iniciar_sesion('ruben.c_ac@icloud.com', 'Prada2024!')  # Asegúrate de usar tus credenciales reales
+    """Obtiene la lista de zonas de BiciMAD Go disponibles."""
+    token, _ = iniciar_sesion('TU_EMAIL', 'TU_CONTRASEÑA')  # Asegúrate de usar tus credenciales reales
     if token:
-        url = f"{base_url}/transport/bicimad/go/"
+        url = f"https://openapi.emtmadrid.es/v1/transport/bicimad/gozones/"
         headers = {
-            "accessToken": token,
-            "Content-Type": "application/json"
+            "Authorization": f"Bearer {token}",
         }
         response = requests.get(url, headers=headers)
         if response.status_code == 200:
-            bicimad_go = response.json()
-            return jsonify(bicimad_go)
+            zonas = response.json().get("data", [])
+            return jsonify(zonas)
         else:
-            return jsonify({"mensaje": "Error al obtener las bicicletas BiciMAD Go."}), response.status_code
+            return jsonify({"mensaje": "Error al obtener las zonas BiciMAD Go."}), response.status_code
     else:
         return jsonify({"mensaje": "Error de autenticación."}), 401
+
 
 
 @app.route('/')

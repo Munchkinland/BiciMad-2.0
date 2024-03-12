@@ -6,55 +6,163 @@
     <title>Aplicación BiciMAD</title>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            padding: 20px;
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #120136;
+            font-family: 'Roboto', sans-serif;
+            color: #ffffff;
         }
-        .container {
-            background-color: white;
+
+        main {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: auto 1fr 1fr auto;
+            gap: 20px;
             padding: 20px;
+            box-sizing: border-box;
+            width: calc(100% - 40px);
+            height: calc(100vh - 40px);
+            grid-template-areas:
+                "nav nav"
+                "test estaciones"
+                "bicimadgo huella"
+                "footer footer";
+        }
+
+        nav, .container, footer {
+            padding: 20px;
+            background-color: #3b0273;
             border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
+            transition: transform 0.3s;
         }
+
+        nav {
+            grid-area: nav;
+        }
+
+        .container.test {
+            grid-area: test;
+        }
+
+        .container.estaciones {
+            grid-area: estaciones;
+        }
+
+        .container.bicimadgo {
+            grid-area: bicimadgo;
+        }
+
+        .container.huella {
+            grid-area: huella;
+        }
+
+        footer {
+            grid-area: footer;
+            background-color: #3b0273;
+            width: 100%;
+            text-align: center;
+        }
+
+        h2 {
+            margin: 0 0 20px 0;
+        }
+
+        button, input[type="text"], input[type="number"], select {
+            background-color: #9d4edd;
+            color: #ffffff;
+            border: none;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 5px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        button:hover {
+            background-color: #c77dff;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
+            transform: translateY(-3px);
+        }
+
+        label {
+            color: #ffffff;
+            margin-top: 10px;
+        }
+
         .navigation a {
-            margin-right: 10px;
             text-decoration: none;
-            color: blue;
+            color: #ffffff;
+            margin-right: 10px;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
         }
     </style>
 </head>
 <body>
 
-<div class="navigation">
-    <a href="/">Inicio</a>
-    <a href="/eda">Análisis EDA</a>
-    <a href="/proyectoml">Proyecto ML</a>
-</div>
+<main>
+    <nav>
+        <div class="navigation">
+            <a href="/">Inicio</a>
+            <a href="/eda">Análisis EDA</a>
+            <a href="/proyectoml">Proyecto ML</a>
+        </div>
+    </nav>
 
-<div class="container">
-    <h2>Test de Conexión</h2>
-    <button onclick="testConexion()">Testear Conexión</button>
-</div>
+    <div class="container test">
+        <h2>Test de Conexión</h2>
+        <button onclick="testConexion()">Testear Conexión</button>
+    </div>
 
-<div class="container">
-    <h2>Consulta de Estaciones BiciMAD</h2>
-    <input type="text" id="id_o_nombre_estacion" placeholder="ID o Nombre de la Estación">
-    <button onclick="buscarEstacion()">Buscar Estación</button>
-</div>
+    <div class="container estaciones">
+        <h2>Consulta de Estaciones BiciMAD</h2>
+        <input type="text" id="id_o_nombre_estacion" placeholder="ID o Nombre de la Estación">
+        <button onclick="buscarEstacion()">Buscar Estación</button>
+    </div>
 
-<div class="container">
-    <h2>Bicicletas BiciMAD Go Disponibles</h2>
-    <button onclick="obtenerBiciMADGo()">Ver Bicicletas Disponibles</button>
-    <div id="bicimadgo-resultados"></div>
-</div>
+    <div class="container bicimadgo">
+        <h2>Bicicletas BiciMAD Go Disponibles</h2>
+        <button onclick="obtenerBiciMADGo()">Ver Bicicletas Disponibles</button>
+        <div id="bicimadgo-resultados"></div>
+    </div>
 
-<div class="container">
-    <h2>Calcula tu huella ecológica</h2>
-    <p>Reduce tu huella de carbono usando BiciMAD.</p>
-    <button onclick="calcularHuella()">Calcular Huella</button>
-</div>
+    <div class="container huella">
+        <h2>Calcula tu huella ecológica</h2>
+        <p>Reduce tu huella de carbono usando BiciMAD.</p>
+        <label for="tipo-vehiculo">Tipo de Vehículo:</label>
+        <select id="tipo-vehiculo">
+            <option value="coche">Coche</option>
+            <option value="moto">Moto</option>
+            <option value="autobus">Autobús</option>
+        </select><br>
+        <label for="combustible">Tipo de Combustible:</label>
+        <select id="combustible">
+            <option value="gasolina">Gasolina</option>
+            <option value="diesel">Diésel</option>
+            <option value="electrico">Eléctrico</option>
+        </select><br>
+        <label for="consumo">Consumo de Combustible por Kilómetro (litros):</label>
+        <input type="number" id="consumo"><br>
+        <label for="distancia">Distancia Recorrida (kilómetros):</label>
+        <input type="number" id="distancia"><br>
+        <button onclick="calcularHuella()">Calcular Huella</button>
+    </div>
+
+    <footer>
+        <p>Derechos reservados © 2024 BiciMAD</p>
+    </footer>
+</main>
 
 <script>
 function testConexion() {
@@ -114,27 +222,62 @@ function buscarEstacion() {
 }
 
 function obtenerBiciMADGo() {
-    fetch('/bicimadgo')
-        .then(response => response.json())
-        .then(data => {
-            const contenedor = document.getElementById('bicimadgo-resultados');
-            contenedor.innerHTML = ''; // Limpia resultados anteriores
-            if(data.data && data.data.length > 0) {
-                const bicis = data.data.map(bici => `<p>${bici.name} - ${bici.address}</p>`).join('');
-                contenedor.innerHTML = bicis;
-            } else {
-                contenedor.innerHTML = '<p>No se encontraron bicicletas disponibles.</p>';
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            document.getElementById('bicimadgo-resultados').innerHTML = '<p>Hubo un error al obtener las bicicletas disponibles.</p>';
-        });
+    const url = "https://openapi.emtmadrid.es/v1/transport/bicimad/gozones/";
+    fetch(url, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer TU_CLAVE_API` // Reemplaza TU_CLAVE_API con tu clave de API real
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        const contenedor = document.getElementById('bicimadgo-resultados');
+        contenedor.innerHTML = ''; // Limpia resultados anteriores
+        if (data.data && data.data.length > 0) {
+            const zonas = data.data.map(zona => `<p>Zona: ${zona.name} - Dirección: ${zona.address}</p>`).join('');
+            contenedor.innerHTML = zonas;
+        } else {
+            contenedor.innerHTML = '<p>No se encontraron zonas disponibles de BiciMAD GO.</p>';
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        document.getElementById('bicimadgo-resultados').innerHTML = '<p>Hubo un error al obtener las zonas de BiciMAD GO.</p>';
+    });
 }
 
 function calcularHuella() {
-    // Implementa la lógica para calcular la huella ecológica aquí
-    alert('Función calcularHuella no implementada.');
+    const tipoVehiculo = document.getElementById('tipo-vehiculo').value;
+    const tipoCombustible = document.getElementById('combustible').value;
+    const consumo = parseFloat(document.getElementById('consumo').value);
+    const distancia = parseFloat(document.getElementById('distancia').value);
+
+    let emisiones = 0;
+    if (tipoVehiculo === 'coche' || tipoVehiculo === 'moto' || tipoVehiculo === 'autobus') {
+        if (tipoCombustible === 'gasolina') {
+            const emisionesGasolina = 2.3; // kg CO2 / litro de gasolina
+            emisiones = consumo * emisionesGasolina * distancia;
+        } else if (tipoCombustible === 'diesel') {
+            const emisionesDiesel = 2.7; // kg CO2 / litro de diésel
+            emisiones = consumo * emisionesDiesel * distancia;
+        } else if (tipoCombustible === 'electrico') {
+            const emisionesElectricidad = 0.2; // kg CO2 / kWh
+            const consumoElectricidad = 0.2 * distancia;
+            emisiones = consumoElectricidad * emisionesElectricidad;
+        }
+    }
+
+    Swal.fire({
+        title: 'Resultado de la Huella Ecológica',
+        html: `<p>Las emisiones de CO2 para ${tipoVehiculo} son aproximadamente: <strong>${emisiones.toFixed(2)} kg CO2 😵</strong>.</p>`,
+        icon: 'info',
+        confirmButtonText: 'Aceptar'
+    });
 }
 </script>
 
