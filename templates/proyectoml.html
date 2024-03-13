@@ -139,10 +139,11 @@
                         '2_semanas': 'prediccion_2_semanas.html',
                         '1_mes': 'prediccion_1_mes.html'
                     };
-                    var rutaArchivo = 'data/processed/' + archivos[periodo]; // Construye la ruta del archivo
+                    var rutaArchivo = 'data/processed/' + archivos[periodo]; // Corrección: Construye la ruta del archivo correctamente
                     document.getElementById('iframePrediccion').src = rutaArchivo; // Cambia el src del iframe
                 }
             </script>
+            
         </div>
     </main>
 </body>

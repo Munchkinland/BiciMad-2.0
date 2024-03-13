@@ -6,7 +6,7 @@ import pandas as pd
 from statsmodels.tsa.arima.model import ARIMAResults
 import datetime
 
-
+app = Flask(__name__)
 
 
 # URL base de la API de BiciMAD
