@@ -6,27 +6,6 @@ import pandas as pd
 from statsmodels.tsa.arima.model import ARIMAResults
 import datetime
 
-app = Flask(__name__)
-
-# Cargar el modelo ARIMA
-modelo_arima = ARIMAResults.load('models/prediccionDemanda_model_arima.pkl')
-
-@app.route('/prediccion', methods=['POST'])
-def prediccion():
-    datos = request.get_json()
-    dias = datos['dias']
-    
-    fecha_inicio = pd.to_datetime('today')
-    fecha_fin = fecha_inicio + pd.DateOffset(days=dias)
-
-    predicciones = modelo_arima.predict(start=fecha_inicio, end=fecha_fin, typ='levels')
-
-    # Preparar los datos para Plotly
-    predicciones_json = {
-        "fechas": predicciones.index.strftime('%Y-%m-%d').tolist(),
-        "valores": predicciones.values.tolist()
-    }
-    return jsonify(predicciones_json)
 
 
 
