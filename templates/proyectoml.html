@@ -115,79 +115,35 @@
 <body>
     <main>
         <header>
-            <h1>🧑‍💻Interfaz de Predicción🤖</h1><img src="../static/babyYoda.gif" alt="Placeholder" class="fade-in" id="imagen1" width="260">
+            <h1>🧑‍💻Interfaz de Predicción🤖</h1>
+            <img src="../static/babyYoda.gif" alt="Placeholder" class="fade-in" id="imagen1" width="260">
         </header>
         <div class="test">
             <h2>Predicción de la Demanda de Bicicletas</h2>
             <p>Selecciona el marco temporal para la predicción:</p>
             <div class="prediction-buttons">
-                <button onclick="solicitarPrediccion(1)">1 día</button>
-                <button onclick="solicitarPrediccion(7)">7 días</button>
-                <button onclick="solicitarPrediccion(15)">15 días</button>
-                <button onclick="solicitarPrediccion(30)">30 días</button>
+                <button onclick="mostrarPrediccion('1_día')">1 día</button>
+                <button onclick="mostrarPrediccion('1_semana')">7 días</button>
+                <button onclick="mostrarPrediccion('2_semanas')">15 días</button>
+                <button onclick="mostrarPrediccion('1_mes')">30 días</button>
             </div>
-            <div id="graficoPrediccion" style="width:100%; height:100%;"></div>
-
+            <!-- Un iframe para cargar el contenido HTML de las predicciones -->
+            <iframe id="iframePrediccion" style="width:100%;height:600px;border:none;"></iframe>
             
             <script>
-                function solicitarPrediccion(dias) {
-                    fetch('/prediccion', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({dias: dias}),
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        const trace1 = {
-                            type: 'scatter',
-                            mode: 'lines',
-                            x: data.fechas,
-                            y: data.valores,
-                            marker: {color: '#17BECF'},
-                            name: 'Predicción de Demanda'
-                        };
-            
-                        const layout = {
-                            title: 'Predicción de Demanda de Bicicletas',
-                            xaxis: {
-                                title: 'Fecha'
-                            },
-                            yaxis: {
-                                title: 'Demanda'
-                            }
-                        };
-            
-                        Plotly.newPlot('graficoPrediccion', [trace1], layout);
-                    })
-                    .catch((error) => {
-                        console.error('Error:', error);
-                    });
+                function mostrarPrediccion(periodo) {
+                    // Mapeo del periodo al nombre de archivo correspondiente
+                    var archivos = {
+                        '1_día': 'prediccion_1_día.html',
+                        '1_semana': 'prediccion_1_semana.html',
+                        '2_semanas': 'prediccion_2_semanas.html',
+                        '1_mes': 'prediccion_1_mes.html'
+                    };
+                    var rutaArchivo = 'data/processed/' + archivos[periodo]; // Construye la ruta del archivo
+                    document.getElementById('iframePrediccion').src = rutaArchivo; // Cambia el src del iframe
                 }
             </script>
-            
-            </script>
-       
-        <footer>
-            <div class="navigation-buttons">
-                <button onclick="window.history.back();">Volver a la página anterior</button>
-                <button onclick="window.location.href='/appuser';">Ir a la página siguiente</button>
-            </div>
-        </footer>
+        </div>
     </main>
-
-    <script>
-        function prediccionBicicletas(tiempo) {
-            alert("Predicción de la demanda de bicicletas para " + tiempo);
-        }
-
-        function prediccionRuta() {
-            var unlockStation = document.getElementById("unlock_station").value;
-            var lockStation = document.getElementById("lock_station").value;
-            alert("Predicción de ruta para la estación de " + unlockStation + " a la estación de " + lockStation);
-        }
-    </script>
 </body>
 </html>
-
