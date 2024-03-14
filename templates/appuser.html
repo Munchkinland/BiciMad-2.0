@@ -125,16 +125,14 @@
         <h2>Calcula tu huella ecológica</h2>
         <p>Reduce tu huella de carbono usando BiciMAD.</p>
         <label for="tipo-vehiculo">Tipo de Vehículo:</label>
-        <select id="tipo-vehiculo">
+        <select id="tipo-vehiculo" onchange="actualizarTipoCombustible()">
             <option value="coche">Coche</option>
             <option value="moto">Moto</option>
             <option value="autobus">Autobús</option>
         </select><br>
         <label for="combustible">Tipo de Combustible:</label>
         <select id="combustible">
-            <option value="gasolina">Gasolina</option>
-            <option value="diesel">Diésel</option>
-            <option value="electrico">Eléctrico</option>
+            <!-- Las opciones se actualizarán dinámicamente -->
         </select><br>
         <label for="consumo">Consumo de Combustible por Kilómetro (litros):</label>
         <input type="number" id="consumo"><br>
@@ -202,7 +200,6 @@ function obtenerBiciMADGo() {
     fetch('/bicimadgo')
         .then(response => response.json())
         .then(data => {
-            // Si usas SweetAlert2 para mostrar los resultados
             Swal.fire({
                 title: 'Zonas BiciMAD Go',
                 html: data.map(zona => `<p>${zona.name}: Permitido: ${zona.include}, Aparcamiento: ${zona.canPark}</p>`).join(''),
@@ -215,6 +212,29 @@ function obtenerBiciMADGo() {
         });
 }
 
+function actualizarTipoCombustible() {
+    const tipoVehiculo = document.getElementById('tipo-vehiculo').value;
+    const selectCombustible = document.getElementById('combustible');
+
+    while (selectCombustible.options.length > 0) { 
+        selectCombustible.remove(0); 
+    }
+
+    let opcionesCombustible = [];
+    if (tipoVehiculo === 'coche') {
+        opcionesCombustible = ['gasolina', 'diesel', 'electrico'];
+    } else if (tipoVehiculo === 'moto') {
+        opcionesCombustible = ['gasolina', 'electrico'];
+    } else if (tipoVehiculo === 'autobus') {
+        opcionesCombustible = ['diesel', 'electrico'];
+    }
+
+    opcionesCombustible.forEach(opcion => {
+        let option = new Option(opcion.charAt(0).toUpperCase() + opcion.slice(1), opcion);
+        selectCombustible.add(option);
+    });
+}
+
 function calcularHuella() {
     const tipoVehiculo = document.getElementById('tipo-vehiculo').value;
     const tipoCombustible = document.getElementById('combustible').value;
@@ -222,14 +242,17 @@ function calcularHuella() {
     const distancia = parseFloat(document.getElementById('distancia').value);
 
     let emisiones = 0;
-    if (tipoVehiculo === 'coche' || tipoVehiculo === 'moto' || tipoVehiculo === 'autobus') {
-        if (tipoCombustible === 'gasolina') {
-            emisiones = consumo * distancia * 2.31; // Emisiones por litro para gasolina
-        } else if (tipoCombustible === 'diesel') {
-            emisiones = consumo * distancia * 2.68; // Emisiones por litro para diesel
-        } else if (tipoCombustible === 'electrico') {
-            emisiones = consumo * distancia * 0; // Emisiones para vehículos eléctricos (simplificado)
-        }
+    if (tipoCombustible === 'gasolina') {
+        emisiones = consumo * distancia * 2.31; // Emisiones por litro para gasolina
+    } else if (tipoCombustible === 'diesel') {
+        emisiones = consumo * distancia * 2.68; // Emisiones por litro para diesel
+    } else if (tipoCombustible === 'electrico') {
+        emisiones = consumo * distancia * 0; // Emisiones para vehículos eléctricos (simplificado)
+    }
+
+    // Ajuste para autobuses considerando 50 personas de media
+    if (tipoVehiculo === 'autobus') {
+        emisiones = emisiones / 50; // Dividir la huella de carbono por el número de pasajeros
     }
 
     Swal.fire({
@@ -239,6 +262,12 @@ function calcularHuella() {
         confirmButtonText: 'Aceptar'
     });
 }
+
+// Inicializar con coche seleccionado por defecto
+document.addEventListener('DOMContentLoaded', function() {
+    actualizarTipoCombustible();
+});
+
 </script>
 
 </body>

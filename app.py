@@ -1,10 +1,5 @@
 from flask import Flask, render_template, request, jsonify
 import requests
-from flask import Flask, render_template, request, jsonify
-import requests
-import pandas as pd
-from statsmodels.tsa.arima.model import ARIMAResults
-import datetime
 
 app = Flask(__name__)
 
