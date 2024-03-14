@@ -7,108 +7,71 @@
     <title>Interfaz de Usuario BiciMAD</title>
     <link rel="stylesheet" href="../static/style.css">
     <style>
-        /* Importa la fuente Google que prefieras */
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
-        /* Establece un color de fondo general y la fuente */
         body, html {
             margin: 0;
             padding: 0;
             height: 100%;
+            background-color: #120136;
+            font-family: 'Roboto', sans-serif;
+            color: #ffffff;
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #120136; /* Color de fondo oscuro para todo el body */
-            font-family: 'Roboto', sans-serif; /* Tipografía Roboto para todo el texto */
-            color: #ffffff; /* Color del texto */
         }
 
-        /* Configura el área de contenido principal */
         main {
-            display: grid;
-            width: calc(100% - 40px); /* Asegura que el contenido se ajuste al padding */
-            height: calc(100vh - 40px); /* Asegura que el contenido se ajuste a la altura de la ventana */
-            grid-template-columns: repeat(2, 1fr);
-            grid-template-rows: auto 1fr 1fr auto;
-            gap: 20px;
+            width: calc(100% - 40px);
+            max-width: 1200px;
             padding: 20px;
             box-sizing: border-box;
-            grid-template-areas:
-                "header header"
-                "test estacion"
-                "ruta calculadora"
-                "footer footer";
-        }
-
-        header, .test, .estacion, .ruta, .calculadora, footer {
+            background-color: #5a189a;
+            border-radius: 10px;
+            margin: 20px;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            flex-direction: column;
+        }
+
+        header, footer {
+            width: 100%;
             padding: 20px;
-            background-color: #3b0273; /* Color de fondo para encabezados y pie de página */
+            background-color: #3b0273;
             border-radius: 10px;
-            transition: transform 0.3s; /* Animación de transformación para el hover */
+            text-align: center;
+            margin-bottom: 20px;
         }
 
-        header {
-            grid-area: header;
-            font-size: 2rem; /* Tamaño del texto para el título principal */
+        .tableauPlaceholder {
+            width: 100%;
+            height: 600px;
+            margin-bottom: 20px;
         }
 
-        .test, .estacion, .ruta, .calculadora {
-            background-color: #5a189a; /* Color de fondo para las secciones */
-            color: #ffffff; /* Color del texto */
-            grid-area: auto; /* Asignación automática al área de cuadrícula */
-            border-radius: 10px;
-        }
-
-        footer {
-            grid-area: footer;
-            background-color: #3b0273; /* Color de fondo para el pie de página */
-            width: 100%; /* Ancho completo dentro de su área de cuadrícula */
-            border-radius: 10px;
-        }
-
-        /* Estilos de botones y efectos de hover */
-        button {
-            background-color: #9d4edd; /* Color de fondo para botones */
-            color: #ffffff; /* Color del texto */
-            border: none;
-            padding: 10px 20px;
-            margin-top: 10px; /* Espacio superior para separar del texto */
-            border-radius: 5px;
-            cursor: pointer;
-            transition: all 0.3s ease; /* Transición suave para color y sombra */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Sombra para dar efecto elevado */
-        }
-
-        button:hover {
-            background-color: #c77dff; /* Color de fondo al hacer hover */
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6); /* Sombra más grande al hacer hover */
-            transform: translateY(-3px); /* Elevación al hacer hover */
-        }
-
-        .navigation-buttons a {
-            text-decoration: none; /* Quita el subrayado de los enlaces */
-            color: #ffffff; /* Color del texto */
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
         }
 
         .navigation-buttons a button {
-            background: none; /* Fondo transparente para los botones de enlace */
-            border: 2px solid #ffffff; /* Borde blanco para resaltar */
-            margin: 0 10px; /* Espaciado a los lados de los botones */
-        }
-        
-        /* Estilos adicionales para los botones de predicción */
-        .prediction-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
+            background-color: #9d4edd;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
         }
 
-        .prediction-buttons button {
-            margin: 5px;
+        .navigation-buttons a button:hover {
+            background-color: #c77dff;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
+            transform: translateY(-3px);
         }
     </style>
 </head>
@@ -118,33 +81,43 @@
             <h1>🧑‍💻Interfaz de Predicción🤖</h1>
             <img src="../static/babyYoda.gif" alt="Placeholder" class="fade-in" id="imagen1" width="260">
         </header>
-        <div class="test">
-            <h2>Predicción de la Demanda de Bicicletas</h2>
-            <p>Selecciona el marco temporal para la predicción:</p>
-            <div class="prediction-buttons">
-                <button onclick="mostrarPrediccion('1_día')">1 día</button>
-                <button onclick="mostrarPrediccion('1_semana')">7 días</button>
-                <button onclick="mostrarPrediccion('2_semanas')">15 días</button>
-                <button onclick="mostrarPrediccion('1_mes')">30 días</button>
-            </div>
-            <!-- Un iframe para cargar el contenido HTML de las predicciones -->
-            <iframe id="iframePrediccion" style="width:100%;height:600px;border:none;"></iframe>
-            
-            <script>
-                function mostrarPrediccion(periodo) {
-                    // Mapeo del periodo al nombre de archivo correspondiente
-                    var archivos = {
-                        '1_día': 'prediccion_1_día.html',
-                        '1_semana': 'prediccion_1_semana.html',
-                        '2_semanas': 'prediccion_2_semanas.html',
-                        '1_mes': 'prediccion_1_mes.html'
-                    };
-                    var rutaArchivo = 'data/processed/' + archivos[periodo]; // Corrección: Construye la ruta del archivo correctamente
-                    document.getElementById('iframePrediccion').src = rutaArchivo; // Cambia el src del iframe
-                }
-            </script>
-            
+
+        <div class='tableauPlaceholder' id='viz1710396868817' style='position: relative'>
+            <noscript><a href='#'><img alt='🧭Linea Tiempo biciMad 🚲' src='https://public.tableau.com/static/images/li/lineaTiempoBicimad/1mes/1_rss.png' style='border: none' /></a></noscript>
+            <object class='tableauViz'  style='display:none;'>
+                <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+                <param name='embed_code_version' value='3' />
+                <param name='site_root' value='' />
+                <param name='name' value='lineaTiempoBicimad/1mes' />
+                <param name='tabs' value='no' />
+                <param name='toolbar' value='yes' />
+                <param name='static_image' value='https://public.tableau.com/static/images/li/lineaTiempoBicimad/1mes/1.png' />
+                <param name='animate_transition' value='yes' />
+                <param name='display_static_image' value='yes' />
+                <param name='display_spinner' value='yes' />
+                <param name='display_overlay' value='yes' />
+                <param name='display_count' value='yes' />
+                <param name='language' value='es-ES' />
+                <param name='filter' value='publish=yes' />
+            </object>
         </div>
+        <script type='text/javascript'>
+            var divElement = document.getElementById('viz1710396868817');
+            var vizElement = divElement.getElementsByTagName('object')[0];
+            vizElement.style.width='150%';
+            vizElement.style.height='600px';
+            var scriptElement = document.createElement('script');
+            scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+            vizElement.parentNode.insertBefore(scriptElement, vizElement);
+        </script>
+
+        <footer>
+            <!-- Botones para navegar entre páginas -->
+            <div class="navigation-buttons">
+                <a href="/eda"><button>EDA</button></a>
+                <a href="/appuser"><button>Interface Usuario</button></a>
+            </div>
+        </footer>
     </main>
 </body>
 </html>
