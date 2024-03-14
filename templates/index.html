@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Historia de BiciMAD</title>
-    <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="static/style.css">
     <style>
         .fade-in {
             opacity: 0;
@@ -37,78 +37,60 @@
         .next {
             right: 10px;
         }
+        /* Estilo para asegurar que las imágenes tengan las mismas dimensiones */
+        .imagen-equipo {
+            width: 150px; /* Ancho fijo para todas las imágenes */
+            height: auto; /* Altura auto para mantener la proporción */
+        }
     </style>
 </head>
 <body>
     <header>
-        <h1>😀Historia de BiciMAD🚵‍♀️</h1>
+        <h1>😀Historia de BiciMAD🚵‍♀️</h1> <img src="static/4goriginal.png" alt="4 geeks logo" class="fade-in imagen-equipo" id="4geeks" style="width: 150px; height: 150px;">
     </header>
     <div class="container">
-
         <h2>Orígenes</h2>
         <p>BiciMAD, el sistema de bicicletas públicas de Madrid, inaugurado en 2014, promueve la movilidad sostenible y reduce la congestión vehicular.</p>
 
         <h2>El Equipo</h2>
         <p>Nuestro Equipo está formado por Juan Lizondo y Rubén Carrasco, dos jóvenes apasionados del Data Analytics y la Machine Learning. Siempre vamos un poquito más allá, explorando nuevas fronteras y desafiando los límites. Nuestra misión es transformar datos en conocimiento, y conocimiento en soluciones innovadoras. ¡Bienvenidos a nuestro mundo de análisis y aprendizaje automático!🚀🔍🤖</p>
-        <img src="../static/juanL.jpeg" alt="Placeholder" class="fade-in" id="imagen1" width="200"> <img src="../static/rubenC.jpeg" alt="Placeholder" class="fade-in" id="imagen2" width="200">
-        
 
+        <!-- Imágenes con dimensiones iguales y ruta corregida para Homer -->
+        <!-- Imágenes con dimensiones iguales y ruta corregida para Homer -->
+        <img src="static/juanL.jpeg" alt="Juan Lizondo" class="fade-in imagen-equipo" id="imagenJuan" style="width: 150px; height: 250px;">
+        <img src="static/rubenC.jpeg" alt="Rubén Carrasco" class="fade-in imagen-equipo" id="imagenRuben" style="width: 150px; height: 250px;">
+
+        
         <h2>Desarrollo y Expansión</h2>
         <p>BiciMAD ha crecido significativamente desde su inicio, contando actualmente con 7,500 bicicletas eléctricas y 611 estaciones en toda la ciudad, facilitando casi 6 millones de viajes.</p>
 
         <h2>Impacto en la Movilidad Urbana</h2>
         <p>BiciMAD ha reducido la contaminación y la congestión del tráfico en Madrid, proporcionando una alternativa ecológica y conveniente al transporte motorizado.</p>
 
-        <!-- Imagen 1 reducida a 400 píxeles de ancho -->
-        <img src="../static/homerEnd.gif" alt="Placeholder" class="fade-in" id="imagen1" width="400">
+        <img src="static/homerEnd.gif" alt="Homer Simpson desapareciendo" class="fade-in" id="imagenHomer" width="400">
 
         <h2>Objetivo de nuestro proyecto</h2>
         <p>Nuestro objetivo es optimizar BiciMAD utilizando Machine Learning para reducir la huella ecológica, promover un estilo de vida saludable, reducir la contaminación y mejorar la experiencia del usuario.</p>
-        <!-- Imagen 2 reducida a 400 píxeles de ancho -->
-        <img src="../static/bicimad_logo.jpg" alt="Placeholder" class="fade-in" id="imagen2" width="400">
 
-        <!-- Imágenes reales -->
-        <!-- <img src="../static/bicis.jpg" alt="Bicis" class="real-img" id="imagenReal1" style="display: none;"> -->
-        <!-- <img src="../static/bicimad_logo.jpg" alt="Logo de BiciMAD" class="real-img" id="imagenReal2" style="display: none;"> -->
-
-        <!-- Botón para ir a la página 2 -->
         <a href="/eda"><button>EDA</button></a>
-
     </div>
 
     <script>
-        // Mostrar imágenes gradualmente al hacer scroll usando IntersectionObserver
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
+        // IntersectionObserver para visualizar imágenes al hacer scroll
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            });
+
+            const imagenes = document.querySelectorAll('.fade-in');
+            imagenes.forEach(imagen => {
+                observer.observe(imagen);
             });
         });
-
-        const imagenes = document.querySelectorAll('.fade-in');
-        imagenes.forEach(imagen => {
-            observer.observe(imagen);
-        });
-
-        // Función para cambiar las diapositivas
-        let slideIndex = 1;
-        showSlides(slideIndex);
-
-        function plusSlides(n) {
-            showSlides(slideIndex += n);
-        }
-
-        function showSlides(n) {
-            const slides = document.querySelectorAll('.fade-in');
-            if (n > slides.length) {slideIndex = 1}    
-            if (n < 1) {slideIndex = slides.length}
-            slides.forEach(slide => {
-                slide.style.display = 'none';  
-            });
-            slides[slideIndex-1].style.display = 'block';  
-        }
     </script>
 </body>
 </html>
-
