@@ -1,4 +1,4 @@
-# BiciMad ML Improvement Project
+# BiciMad ML Improvement Project 🚵
 
 ✅Description
 This project is a Flask-based web application designed to interact with the BiciMAD API, Madrid's public bicycle sharing system. It provides users with the ability to retrieve information about BiciMAD stations, test API connections, and access the BiciMAD Go zones.
