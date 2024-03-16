@@ -2,17 +2,19 @@
 
 ![DALLE-E_BICI](https://github.com/Munchkinland/BiciMad_Front_User/assets/92251234/fcc8bb4a-dcea-4eea-959f-bccdc86451cb)
 
-✅Description
+✅Description:
+
 This project is a Flask-based web application designed to interact with the BiciMAD API, Madrid's public bicycle sharing system. It provides users with the ability to retrieve information about BiciMAD stations, test API connections, and access the BiciMAD Go zones.
 
-✅Features
+✅Features:
+
 User authentication to access the BiciMAD API.
 Fetching the list of BiciMAD stations and displaying them as JSON.
 Testing the connection to the BiciMAD API and verifying token receipt.
 Retrieving and displaying BiciMAD Go zones as JSON.
 Rendered pages for various application states including the homepage, EDA (Exploratory Data Analysis), ML project information, and user application interface.
 
-✅Installation
+✅Installation:
 
 Clone this repository.
 
