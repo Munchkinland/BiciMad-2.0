@@ -1,32 +1,33 @@
 # BiciMad ML Improvement Project
 
-Description
+✅Description
 This project is a Flask-based web application designed to interact with the BiciMAD API, Madrid's public bicycle sharing system. It provides users with the ability to retrieve information about BiciMAD stations, test API connections, and access the BiciMAD Go zones.
 
-Features
+✅Features
 User authentication to access the BiciMAD API.
 Fetching the list of BiciMAD stations and displaying them as JSON.
 Testing the connection to the BiciMAD API and verifying token receipt.
 Retrieving and displaying BiciMAD Go zones as JSON.
 Rendered pages for various application states including the homepage, EDA (Exploratory Data Analysis), ML project information, and user application interface.
-Installation
+
+✅Installation
+
 Clone this repository.
 
 Create a virtual environment:
-
 python -m venv venv
+
 Activate the virtual environment:
 
 On Windows:
-
 venv\Scripts\activate
-On Unix or MacOS:
 
+On Unix or MacOS:
 source venv/bin/activate
 Install the required packages:
 pip install -r requirements.txt
 
-Run the application:
+✅Run the application:
 
 python app.py
 Usage
@@ -40,8 +41,8 @@ Additional routes for /eda, /proyectoml, and /appuser render their respective te
 Configuration
 You must supply your BiciMAD API credentials to use this application. Replace the placeholder email and password in the iniciar_sesion function with your actual BiciMAD API credentials.
 
-Disclaimer
+✅Disclaimer
 This project is intended for educational purposes. Do not use real credentials or API tokens within the source code when sharing publicly.
 
-Contribution
+✅Contribution
 Contributions are welcome. Please fork the repository and submit a pull request for review.
