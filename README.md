@@ -1,6 +1,6 @@
 # BiciMad ML Improvement Project 🚵
 
-![DALLE-E_BICI](https://github.com/Munchkinland/BiciMad_Front_User/assets/92251234/fcc8bb4a-dcea-4eea-959f-bccdc86451cb)
+![project_2](https://github.com/Munchkinland/BiciMad-2.0/assets/92251234/4535e6f0-b197-4031-8a78-6d6a8ed21c97)
 
 ✅Description:
 
